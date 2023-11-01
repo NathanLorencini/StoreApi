@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreApi.Data;
 
@@ -10,9 +11,11 @@ using StoreApi.Data;
 namespace StoreApi.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20231101194008_AddComunication1N")]
+    partial class AddComunication1N
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,8 +125,7 @@ namespace StoreApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Stocks");
                 });
@@ -161,8 +163,8 @@ namespace StoreApi.Migrations
             modelBuilder.Entity("StoreApi.Models.Stock", b =>
                 {
                     b.HasOne("StoreApi.Models.Product", "Product")
-                        .WithOne("Stock")
-                        .HasForeignKey("StoreApi.Models.Stock", "ProductId")
+                        .WithMany("Stock")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -171,8 +173,7 @@ namespace StoreApi.Migrations
 
             modelBuilder.Entity("StoreApi.Models.Product", b =>
                 {
-                    b.Navigation("Stock")
-                        .IsRequired();
+                    b.Navigation("Stock");
                 });
 #pragma warning restore 612, 618
         }

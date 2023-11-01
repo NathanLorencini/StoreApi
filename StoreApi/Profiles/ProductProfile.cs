@@ -9,6 +9,10 @@ namespace StoreApi.Profiles
         public ProductProfile()
         {
             CreateMap<Product, CreateProductDto>().ReverseMap();
+            
+            CreateMap<Product, ReadProdcutDto>().ReverseMap();
+            
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
         }
 
     }

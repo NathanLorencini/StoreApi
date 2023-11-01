@@ -59,5 +59,40 @@ namespace StoreApi.Controllers
 
             return Ok(prod);
         }
+
+
+        [HttpGet]
+        public List<ReadProdcutDto> GetAll()
+        {
+            return _mapper.Map<List<ReadProdcutDto>>(_context.Products.ToList());
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product is null) return NotFound();
+
+            return Ok(product);
+        }
+
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, UpdateProductDto filmeDto)
+        {
+            var prodAtt = _context.Products.FirstOrDefault(x=> x.Id == id);
+
+            if(prodAtt is null) return NotFound();
+
+            
+            var result = _mapper.Map(filmeDto, prodAtt);
+
+            _context.SaveChanges();
+
+
+            return Ok(result);
+        }
     }
 }

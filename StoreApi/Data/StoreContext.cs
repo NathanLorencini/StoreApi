@@ -37,10 +37,18 @@ namespace StoreApi.Data
                 .HasForeignKey(y => y.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
+            modelBuilder.Entity<Stock>()
+                .HasOne(x => x.Product)
+                .WithOne(y => y.Stock);
+            
+          
 
             modelBuilder.Entity<Product>()
                 .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(x => x.Stock)
+                .WithOne(y=> y.Product);
 
         }
 

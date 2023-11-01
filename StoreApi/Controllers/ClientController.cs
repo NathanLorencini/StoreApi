@@ -65,5 +65,22 @@ namespace StoreApi.Controllers
         {
             return _mapper.Map<List<ReadClientDto>>(_context.Clients.ToList());
         }
+
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, UpdateClientDto clientDto)
+        {
+            var client = _context.Clients.FirstOrDefault(x => x.Id == id);
+
+            if (client is null) return NotFound();
+
+            
+            var result = _mapper.Map(clientDto, client);
+
+            
+            _context.SaveChanges();
+
+            return Ok(result);
+        }
     }
 }
