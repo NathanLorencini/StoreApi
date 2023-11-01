@@ -8,6 +8,8 @@ var myConnectionString = builder.Configuration.GetConnectionString("StoreConnect
 
 builder.Services.AddDbContext<StoreContext>(opts => opts.UseSqlServer(connectionString: myConnectionString));
 
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using StoreApi.Data;
 using StoreApi.Enums;
 
 namespace StoreApi.Models
 {
     public class Product
     {
+        private StoreContext _context;
+
+
         public int Id { get; set; }
         
         public string Name { get; set; }
@@ -13,14 +16,6 @@ namespace StoreApi.Models
         
         public int Quantity{ get; set; }
 
-        public int StockId { get; set; }
 
-        public virtual Stock Stock { get; set; }
-
-
-        public Product()
-        {
-            Quantity = Stock.Quantity;
-        }
     }
 }

@@ -42,11 +42,6 @@ namespace StoreApi.Data
             modelBuilder.Entity<Product>()
                 .HasKey(x => x.Id);
 
-            modelBuilder.Entity<Product>()
-                .HasOne(x => x.Stock)
-                .WithMany()
-                .HasForeignKey(y => y.StockId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Client> Clients { get; set; }
