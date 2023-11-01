@@ -1,4 +1,5 @@
-﻿using StoreApi.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using StoreApi.Enums;
 
 namespace StoreApi.Models
 {
@@ -8,8 +9,18 @@ namespace StoreApi.Models
         
         public string Name { get; set; }
 
+        public CategoryProduct Category { get; set; }
+        
         public int Quantity{ get; set; }
 
-        public CategoryProduct Category { get; set; }
+        public int StockId { get; set; }
+
+        public virtual Stock Stock { get; set; }
+
+
+        public Product()
+        {
+            Quantity = Stock.Quantity;
+        }
     }
 }

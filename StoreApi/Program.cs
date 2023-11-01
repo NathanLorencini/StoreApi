@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using StoreApi.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+var myConnectionString = builder.Configuration.GetConnectionString("StoreConnection");
+
+builder.Services.AddDbContext<StoreContext>(opts => opts.UseSqlServer(connectionString: myConnectionString));
 
 // Add services to the container.
 
